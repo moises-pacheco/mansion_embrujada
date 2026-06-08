@@ -129,7 +129,7 @@ export class Mansion{
         const barandillas_atras = [];
         const cantidad_barandillas_atras = 16;
         const barandilla_atras = barandilla_1.clone();
-        barandilla_atras.position.set(-2.7,-1.4,-3);
+        barandilla_atras.position.set(-2.81,-1.4,-3);
 
         posicion_x = 0;
         for(let i = 0; i < cantidad_barandillas_atras; i++){
@@ -140,25 +140,33 @@ export class Mansion{
             barandillas_atras_group.add(barandillas_atras[i]);
         }
 
-        barandillas_atras_group.position.x = -0.2;
+        barandillas_atras_group.position.y = -.2;
         
 
         scene.add(barandillas_atras_group);
 
 
         const parte_superior_barandilla_geometria = new three.BoxGeometry(3.5,0.14,0.2);
-        const parte_superior_barandilla_material = new three.MeshMatcapMaterial({color: 'gray'});
+        const parte_superior_barandilla_material = new three.MeshMatcapMaterial({color: 'gray', wireframe: false});
         const parte_superior_barandilla = new three.Mesh(parte_superior_barandilla_geometria, parte_superior_barandilla_material);
         parte_superior_barandilla.position.set(-1.32,-1,3);
 
 
 
         const parte_superior_barandilla_2 = parte_superior_barandilla.clone();
-        parte_superior_barandilla_2.geometry = new three.BoxGeometry(6.6,0.14,0.2)
+        parte_superior_barandilla_2.geometry.dispose(); // Elimina la gemometria anterior y elimina la memoria.
+        parte_superior_barandilla_2.geometry = new three.BoxGeometry(6.6,0.14,0.2);
         parte_superior_barandilla_2.position.set(0,-1,-3)
         scene.add(parte_superior_barandilla_2);
-        barandillas_atras_group.position.y = -.2;
         
+        
+
+        const parte_superior_barandilla_3 = parte_superior_barandilla_2.clone();
+        parte_superior_barandilla_3.geometry.dispose();
+        parte_superior_barandilla_3.geometry = new three.BoxGeometry(6.2,0.14,0.2);
+        parte_superior_barandilla_3.rotation.y = 1.57;
+        parte_superior_barandilla_3.position.set(-3.4,-1,0)
+        scene.add(parte_superior_barandilla_3);
         
         const barandillas_group_izquierda = barandillas_atras_group.clone();
         barandillas_group_izquierda.rotation.y = 1.57;
@@ -168,9 +176,14 @@ export class Mansion{
         scene.add(barandillas_group_izquierda)
         
 
+
+        const parte_superior_barandilla_4 = parte_superior_barandilla_3.clone();
+        parte_superior_barandilla_4.position.set(3.38,-1,0);
+        scene.add(parte_superior_barandilla_4);
+
         const barandillas_group_derecha = barandillas_group_izquierda.clone();
         barandillas_group_derecha.rotation.y = -1.57;
-        barandillas_group_derecha.position.set(0.4,0,-0.22)
+        barandillas_group_derecha.position.set(0.4,-.1,-0.22)
         scene.add(barandillas_group_derecha)
 
 

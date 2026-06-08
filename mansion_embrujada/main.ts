@@ -8,10 +8,10 @@ import { Mansion } from './clases/create-house';
 
 const scene = new three.Scene();
 scene.background = new three.Color(0x0D1824)
-// scene.fog = new three.FogExp2(0x081017, 0.04);
+scene.fog = new three.FogExp2(0x081017, 0.04);
 const camera = new three.PerspectiveCamera(70, window.innerWidth/ window.innerHeight, 0.1, 1000);
-camera.position.z = 0;
-camera.position.x = -15;
+camera.position.z = 15;
+camera.position.x = 0;
 
 
 camera.lookAt(0,0,0);
