@@ -7,9 +7,14 @@ import { Mansion } from './clases/create-house';
 // Elementos esenciales para iniciar una escena.
 
 const scene = new three.Scene();
-// scene.fog = new three.FogExp2(0x1C374D, 0.04);
+scene.background = new three.Color(0x0D1824)
+// scene.fog = new three.FogExp2(0x081017, 0.04);
 const camera = new three.PerspectiveCamera(70, window.innerWidth/ window.innerHeight, 0.1, 1000);
-camera.position.z = 15;
+camera.position.z = 0;
+camera.position.x = -15;
+
+
+camera.lookAt(0,0,0);
 const renderer = new three.WebGLRenderer();
 renderer.shadowMap.enabled = true; 
 renderer.setSize(window.innerWidth, window.innerHeight);
