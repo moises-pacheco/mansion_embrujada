@@ -1,4 +1,6 @@
 import * as three from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js'
+import {Brush, Evaluator, SUBTRACTION} from 'three-bvh-csg';
 
 export class Mansion{
     //Constructor
@@ -16,10 +18,62 @@ export class Mansion{
          */
 
 
-        const paredes_geometria = new three.BoxGeometry(5.8,4,5);
-        const paredes_material = new three.MeshMatcapMaterial({color:'white'});
-        const paredes = new three.Mesh(paredes_geometria, paredes_material);
-        scene.add(paredes);
+
+    const evaluator = new Evaluator()
+
+    const paredBrush = new Brush(
+        new three.BoxGeometry(6, 5, 0.4),
+        new three.MeshStandardMaterial({ color: 'white', roughness: 0.8 })
+    )
+    paredBrush.position.set(0, 0, 2.3)
+    paredBrush.updateMatrixWorld()
+
+    // Hueco ventana 1
+    const huecoVentana1Brush = new Brush(new three.CylinderGeometry(0.6, 0.42, 0.8, 4))
+    huecoVentana1Brush.position.set(-1.96, 0.2, 2.3)
+    huecoVentana1Brush.rotation.y = 0.78
+    huecoVentana1Brush.updateMatrixWorld()
+
+    // Primera sustracción
+    let paredConHueco = evaluator.evaluate(paredBrush, huecoVentana1Brush, SUBTRACTION)
+
+    // Hueco ventana 2
+    const huecoVentana2Brush = new Brush(new three.CylinderGeometry(0.6, 0.42, 0.8, 4))
+    huecoVentana2Brush.position.set(-0.76, 0.2, 2.3)
+    huecoVentana2Brush.rotation.y = 0.78
+    huecoVentana2Brush.updateMatrixWorld()
+
+    // Segunda sustracción — esto te faltaba
+    const paredConHuecoBrush = new Brush(paredConHueco.geometry, paredConHueco.material)
+    paredConHuecoBrush.updateMatrixWorld()
+    paredConHueco = evaluator.evaluate(paredConHuecoBrush, huecoVentana2Brush, SUBTRACTION)
+
+    paredConHueco.castShadow = true
+    paredConHueco.receiveShadow = true
+    scene.add(paredConHueco)
+
+
+
+        const paredes_group = new three.Group();
+
+        const pared_geometria = new three.BoxGeometry(6,5,0.4);
+        const pared_material = new three.MeshMatcapMaterial({color:'white'});
+        const pared = new three.Mesh(pared_geometria,pared_material);
+        const pared_2 = pared.clone();
+        const pared_3 = pared.clone();
+        pared_3.geometry.dispose();
+        pared_3.geometry = new three.BoxGeometry(4.4,4,5);
+        const pared_4 = pared_3.clone();
+
+        pared.position.set(0,0,2.3);
+        pared_2.position.set(0,0,-2.3);
+        pared_3.rotation.set(0,1.57,0);
+        pared_3.position.set(-.5,0,0);
+        pared_4.position.set(.8,0,0);
+
+
+        paredes_group.add(pared_2, pared_3,pared_4);
+        scene.add(paredes_group);
 
 
 
@@ -59,7 +113,7 @@ export class Mansion{
 
 
         const pilares_geometria = new three.BoxGeometry(0.28,4,0.4);
-        const pilares_material = new three.MeshMatcapMaterial({color:'brown'});
+        const pilares_material = new three.MeshMatcapMaterial({color:'white'});
         const pilar_1 = new three.Mesh(pilares_geometria,pilares_material);
         const pilar_2 = pilar_1.clone();
         const pilar_3 = pilar_1.clone();
@@ -76,29 +130,29 @@ export class Mansion{
         scene.add(pilar_1,pilar_2, pilar_3, pilar_4, pilar_5);
 
 
+        //PUERTA
         const puerta_geometria = new three.BoxGeometry(1.2,2,0.4);
-        const puerta_material = new three.MeshMatcapMaterial({color: 'red'});
+        const puerta_material = new three.MeshMatcapMaterial({color: 'white'});
         const puerta = new three.Mesh(puerta_geometria, puerta_material);
-
         puerta.position.set(1.6,-1,2.6);
-
         scene.add(puerta);
 
 
-        const suelo_geometria = new three.BoxGeometry(7.7,7.7,0.6);
+
+        const suelo_geometria = new three.BoxGeometry(7.7,7.7,1);
         const suelo_material = new three.MeshMatcapMaterial({color: 'white'});
         const suelo = new three.Mesh(suelo_geometria,suelo_material);
 
-        suelo.position.y = -2.3;
+        suelo.position.y = -2.6;
         suelo.rotation.set(1.57,0,0);
 
         scene.add(suelo);
 
-        const escaleras_geometria = new three.BoxGeometry(2,0.4,0.4);
-        const escaleras_material = new three.MeshMatcapMaterial({color: 'green'});
+        const escaleras_geometria = new three.BoxGeometry(2,0.6,0.8);
+        const escaleras_material = new three.MeshMatcapMaterial({color: 'white'});
         const escalera_1 = new three.Mesh(escaleras_geometria,escaleras_material);
 
-        escalera_1.position.set(1.58,-2.4,4);
+        escalera_1.position.set(1.58,-2.8,4);
 
         scene.add(escalera_1);
 
@@ -106,7 +160,7 @@ export class Mansion{
         const barandillas_group = new three.Group();
 
         const barandilla_geometria = new three.BoxGeometry(0.14,1.1,0.1);
-        const barandilla_material = new three.MeshMatcapMaterial({color: 'gray', wireframe: false});
+        const barandilla_material = new three.MeshMatcapMaterial({color: 'white', wireframe: false});
         const barandilla_1 = new three.Mesh(barandilla_geometria, barandilla_material);
         barandilla_1.position.set(-2.8, -1.6, 3);
 
@@ -147,7 +201,7 @@ export class Mansion{
 
 
         const parte_superior_barandilla_geometria = new three.BoxGeometry(3.5,0.14,0.2);
-        const parte_superior_barandilla_material = new three.MeshMatcapMaterial({color: 'gray', wireframe: false});
+        const parte_superior_barandilla_material = new three.MeshMatcapMaterial({color: 'white', wireframe: false});
         const parte_superior_barandilla = new three.Mesh(parte_superior_barandilla_geometria, parte_superior_barandilla_material);
         parte_superior_barandilla.position.set(-1.32,-1,3);
 
@@ -191,16 +245,6 @@ export class Mansion{
         barandillas_group.add(parte_superior_barandilla);
 
 
-        //Bucle para colocar las barandas de manera separada.
-
-
-
-
-
-        
-
-
-
 
         const ventanas_group = new three.Group();
         const ventanas_geometria = new three.CylinderGeometry(0.6, 0.42, 1.4, 4 );
@@ -223,19 +267,88 @@ export class Mansion{
         scene.add(ventanas_group);
 
 
-        
 
-
-
-
-        const tierra_geometria = new three.PlaneGeometry(100,100);
-        const tierra_material = new three.MeshMatcapMaterial({color: 'white', side: three.DoubleSide, wireframe: true});
+        const tierra_geometria = new three.BoxGeometry(20,20,1);
+        const tierra_material = new three.MeshMatcapMaterial({color: 0x183815, side: three.DoubleSide, wireframe: false});
         const tierra = new three.Mesh(tierra_geometria, tierra_material);
         
         tierra.rotation.x = 1.57;
-        tierra.position.y = -2.6;
+        tierra.position.y = -3.6;
+        tierra.position.z = 2;
 
         scene.add(tierra);
+
+        //Cruz
+        const cruz_group = new three.Group();
+        const cruz_geometria = new three.BoxGeometry(0.6,3,0.6);
+        const cruz_material = new three.MeshMatcapMaterial({color: 'white', wireframe: false});
+        const cruz_1 = new three.Mesh(cruz_geometria, cruz_material);
+        const cruz_2 = cruz_1.clone();
+
+        cruz_2.geometry = new three.BoxGeometry(0.6,2,0.6);
+        cruz_1.position.set(0,-2,8);
+        cruz_2.position.set(0,-1.6,8);
+        cruz_2.rotation.set(1.57,0,1.57);
+
+        const base_cruz_geometria = new three.BoxGeometry(1.8,0.6,1.2);
+        const base_cruz = new three.Mesh(base_cruz_geometria, cruz_material);
+        base_cruz.position.set(0,-3.4,8);
+
+
+        cruz_group.add(cruz_1, cruz_2,base_cruz);
+        cruz_group.position.set(8,-0.4,-4);
+        cruz_group.rotation.set(0.08,-0.3,0);
+        cruz_group.scale.set(0.6,0.6,0.6);
+
+
+        scene.add(cruz_group);
+
+        //Caminos
+        const caminos_group = new three.Group();
+        const caminos_geometria = new RoundedBoxGeometry(0.8, 0.2, 0.8, 4, 0.05);
+        const caminos_material = new three.MeshMatcapMaterial({color: 'white'});
+        const caminos_1 = new three.Mesh(caminos_geometria,caminos_material);
+        caminos_1.position.set(1,-3.1,5.3);
+
+        let posicion_z = 0;
+        let posicion_x_primer_camino = 0;
+        let posicion_x_segundo_camino = 0;
+        
+        let primer_camino = [];
+        let segundo_camino = [];
+
+        for(let i = 0; i < 6; i++){
+
+            const camino = caminos_1.clone();
+            const camino_2 = caminos_1.clone();
+            primer_camino.push(camino);
+            segundo_camino.push(camino_2);
+
+            if(primer_camino){
+                primer_camino[i].position.z += posicion_z;
+                primer_camino[i].position.x += posicion_x_primer_camino;
+                caminos_group.add(primer_camino[i]);
+            }
+
+            if(segundo_camino){
+                segundo_camino[i].position.z += posicion_z;
+                segundo_camino[i].position.x += posicion_x_segundo_camino;
+                caminos_group.add(segundo_camino[i]);
+
+            }
+            posicion_z += 1;
+            posicion_x_primer_camino = Math.floor(Math.random() * (-2 - 2 + 1) + 2)
+            posicion_x_segundo_camino = posicion_x_primer_camino + 1;
+
+        }
+
+        scene.add(caminos_group);
+
+
+        // ROCAS
+
+
+
 
 
 
