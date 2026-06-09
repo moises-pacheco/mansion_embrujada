@@ -19,60 +19,56 @@ export class Mansion{
 
 
 
-    const evaluator = new Evaluator()
+        const evaluator = new Evaluator()
 
-    const paredBrush = new Brush(
-        new three.BoxGeometry(6, 5, 0.4),
-        new three.MeshStandardMaterial({ color: 'white', roughness: 0.8 })
-    )
-    paredBrush.position.set(0, 0, 2.3)
-    paredBrush.updateMatrixWorld()
+        const paredBrush = new Brush(
+            new three.BoxGeometry(6, 5, 0.4),
+            new three.MeshMatcapMaterial({ color: 'white'})
+        )
+        paredBrush.position.set(0, 0, 2.3)
+        paredBrush.updateMatrixWorld()
 
-    // Hueco ventana 1
-    const huecoVentana1Brush = new Brush(new three.CylinderGeometry(0.6, 0.42, 0.8, 4))
-    huecoVentana1Brush.position.set(-1.96, 0.2, 2.3)
-    huecoVentana1Brush.rotation.y = 0.78
-    huecoVentana1Brush.updateMatrixWorld()
+        // Hueco ventana 1
+        const huecoVentana1Brush = new Brush(new three.CylinderGeometry(0.6, 0.42, 0.8, 4))
+        huecoVentana1Brush.position.set(-1.96, 0.2, 2.3)
+        huecoVentana1Brush.rotation.y = 0.78
+        huecoVentana1Brush.updateMatrixWorld()
 
-    // Primera sustracción
-    let paredConHueco = evaluator.evaluate(paredBrush, huecoVentana1Brush, SUBTRACTION)
+        // Primera sustracción
+        let paredConHueco = evaluator.evaluate(paredBrush, huecoVentana1Brush, SUBTRACTION)
 
-    // Hueco ventana 2
-    const huecoVentana2Brush = new Brush(new three.CylinderGeometry(0.6, 0.42, 0.8, 4))
-    huecoVentana2Brush.position.set(-0.76, 0.2, 2.3)
-    huecoVentana2Brush.rotation.y = 0.78
-    huecoVentana2Brush.updateMatrixWorld()
+        // Hueco ventana 2
+        const huecoVentana2Brush = new Brush(new three.CylinderGeometry(0.6, 0.42, 0.8, 4))
+        huecoVentana2Brush.position.set(-0.76, 0.2, 2.3)
+        huecoVentana2Brush.rotation.y = 0.78
+        huecoVentana2Brush.updateMatrixWorld()
 
-    // Segunda sustracción — esto te faltaba
-    const paredConHuecoBrush = new Brush(paredConHueco.geometry, paredConHueco.material)
-    paredConHuecoBrush.updateMatrixWorld()
-    paredConHueco = evaluator.evaluate(paredConHuecoBrush, huecoVentana2Brush, SUBTRACTION)
+        // Segunda sustracción
+        const paredConHuecoBrush = new Brush(paredConHueco.geometry, new three.MeshMatcapMaterial({ color: 'white'}))
+        paredConHuecoBrush.position.set(0, 0, 2.3)
+        paredConHuecoBrush.updateMatrixWorld()
+        paredConHueco = evaluator.evaluate(paredConHuecoBrush, huecoVentana2Brush, SUBTRACTION)
 
-    paredConHueco.castShadow = true
-    paredConHueco.receiveShadow = true
-    scene.add(paredConHueco)
+        scene.add(paredConHueco)
 
 
 
         const paredes_group = new three.Group();
 
         const pared_geometria = new three.BoxGeometry(6,5,0.4);
-        const pared_material = new three.MeshMatcapMaterial({color:'white'});
-        const pared = new three.Mesh(pared_geometria,pared_material);
-        const pared_2 = pared.clone();
-        const pared_3 = pared.clone();
+        const pared_material = new three.MeshMatcapMaterial({color:'white', wireframe: true});
+        const pared_2 = new three.Mesh(pared_geometria, pared_material);
+        const pared_3 = new three.Mesh(pared_geometria, pared_material);
         pared_3.geometry.dispose();
         pared_3.geometry = new three.BoxGeometry(4.4,4,5);
         const pared_4 = pared_3.clone();
 
-        pared.position.set(0,0,2.3);
         pared_2.position.set(0,0,-2.3);
         pared_3.rotation.set(0,1.57,0);
         pared_3.position.set(-.5,0,0);
         pared_4.position.set(.8,0,0);
 
-
-        paredes_group.add(pared_2, pared_3,pared_4);
+        paredes_group.add(pared_2, pared_3, pared_4);
         scene.add(paredes_group);
 
 
