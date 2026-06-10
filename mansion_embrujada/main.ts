@@ -10,7 +10,8 @@ const scene = new three.Scene();
 scene.background = new three.Color(0x0D1824)
 // scene.fog = new three.FogExp2(0x081017, 0.05);
 const camera = new three.PerspectiveCamera(70, window.innerWidth/ window.innerHeight, 0.1, 1000);
-camera.position.z = 20;
+camera.position.z = 25;
+camera.position.y = 2;
 
 
 camera.lookAt(0,0,0);
