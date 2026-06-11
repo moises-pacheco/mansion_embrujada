@@ -378,6 +378,13 @@ export class Mansion {
     roca_2.position.x += 14;
     roca_2.position.z += -4;
 
+
+    //Arbol
+
+    const arbol = this.crearArbol(scene);
+    arbol.position.set(-6.8,-3,4);
+    arbol.rotation.set(0,.8,0);
+
     //Prueba animación
     const cubo_prueba = new three.BoxGeometry(0.4, 0.4, 0.4);
     const cubo_material = new three.MeshMatcapMaterial({ color: "red" });
@@ -437,6 +444,201 @@ export class Mansion {
     scene.add(roca);
     return roca;
   }
+
+
+  crearArbol(scene: three.Scene){
+
+    const rama_material = new three.LineBasicMaterial({color:  'white' });
+    const ramas_1 = [];
+
+    ramas_1.push(new three.Vector3(0,0,0));
+    ramas_1.push(new three.Vector3(-.04,.4,0));
+    ramas_1.push(new three.Vector3(-.04,.4,0));
+    ramas_1.push(new three.Vector3(.02,1.4,0));
+    ramas_1.push(new three.Vector3(.02,1.4,0));
+    ramas_1.push(new three.Vector3(.02,1.8,0));
+    ramas_1.push(new three.Vector3(-.4,2,0));
+    ramas_1.push(new three.Vector3(-.6,2.01,0));
+    ramas_1.push(new three.Vector3(-.6,2.01,0)); //Punto
+    ramas_1.push(new three.Vector3(-1,1.9,0));
+    ramas_1.push(new three.Vector3(-1,1.9,0));
+    ramas_1.push(new three.Vector3(-1.4,2,0));
+    ramas_1.push(new three.Vector3(-1.6,2.2,0));
+    ramas_1.push(new three.Vector3(-1.4,2,0));
+    ramas_1.push(new three.Vector3(-1,1.9,0));
+    ramas_1.push(new three.Vector3(-1,1.9,0));
+    ramas_1.push(new three.Vector3(-.6,2.4,0)); 
+    ramas_1.push(new three.Vector3(-.5,2.8,0)); //Punto hacia arriba
+    ramas_1.push(new three.Vector3(-.4,3,0)); 
+    ramas_1.push(new three.Vector3(0,3.2,0)); 
+    ramas_1.push(new three.Vector3(.1,3.4,0)); 
+    ramas_1.push(new three.Vector3(.3,3.3,0)); 
+    ramas_1.push(new three.Vector3(.3,3.1,0)); 
+    ramas_1.push(new three.Vector3(.3,3.3,0)); 
+    ramas_1.push(new three.Vector3(.1,3.4,0)); 
+    ramas_1.push(new three.Vector3(0,3.2,0)); 
+    ramas_1.push(new three.Vector3(-.4,3,0)); 
+    ramas_1.push(new three.Vector3(-.5,2.8,0)); //Punto hacia arriba
+    ramas_1.push(new three.Vector3(-1,3.1,0)); //Punto hacia los lados
+    ramas_1.push(new three.Vector3(-1.6,3.1,0)); 
+    ramas_1.push(new three.Vector3(-1.8,3.24,0)); 
+    ramas_1.push(new three.Vector3(-2,3.01,0)); 
+    ramas_1.push(new three.Vector3(-2.2,3.1,0)); 
+    ramas_1.push(new three.Vector3(-2,3.01,0)); 
+    ramas_1.push(new three.Vector3(-1.8,3.24,0)); 
+    ramas_1.push(new three.Vector3(-1.6,3.1,0)); 
+    ramas_1.push(new three.Vector3(-1,3.1,0)); //Punto hacia los lados
+    ramas_1.push(new three.Vector3(-1.2,3.4,0)); 
+    ramas_1.push(new three.Vector3(-1.6,3.8,0)); 
+    ramas_1.push(new three.Vector3(-1.8,3.8,0)); 
+    ramas_1.push(new three.Vector3(-2,3.7,0)); 
+    ramas_1.push(new three.Vector3(-2.2,3.8,0)); 
+    ramas_1.push(new three.Vector3(-2.4,3.84,0)); 
+    ramas_1.push(new three.Vector3(-2.6,3.6,0)); 
+    ramas_1.push(new three.Vector3(-3,3.4,0)); 
+    ramas_1.push(new three.Vector3(-2.6,3.6,0)); 
+    ramas_1.push(new three.Vector3(-2.4,3.84,0)); 
+    ramas_1.push(new three.Vector3(-2.2,3.8,0)); 
+    ramas_1.push(new three.Vector3(-2,3.7,0)); 
+    ramas_1.push(new three.Vector3(-1.8,3.8,0)); 
+    ramas_1.push(new three.Vector3(-1.6,3.8,0)); 
+    ramas_1.push(new three.Vector3(-1.2,3.4,0)); 
+    ramas_1.push(new three.Vector3(-1,3.1,0)); //Punto hacia los lados
+    ramas_1.push(new three.Vector3(-1.1,3.4,0)); //Punto hacia la izquierda
+    ramas_1.push(new three.Vector3(-1.1,4,0)); 
+    ramas_1.push(new three.Vector3(-1,4.1,0)); 
+    ramas_1.push(new three.Vector3(-.6,4.1,0)); 
+    ramas_1.push(new three.Vector3(-.4,4.2,0)); 
+    ramas_1.push(new three.Vector3(-.3,4.4,0)); 
+    ramas_1.push(new three.Vector3(-.4,4.2,0)); 
+    ramas_1.push(new three.Vector3(-.6,4.1,0)); 
+    ramas_1.push(new three.Vector3(-1,4.1,0)); 
+    ramas_1.push(new three.Vector3(-1.1,4,0)); 
+    ramas_1.push(new three.Vector3(-1.6,4.5,0)); //Punto hacia la izquierda
+    ramas_1.push(new three.Vector3(-1.4,4.7,0)); 
+    ramas_1.push(new three.Vector3(-1.5,4.9,0)); 
+    ramas_1.push(new three.Vector3(-1.1,5.3,0)); 
+    ramas_1.push(new three.Vector3(-1.5,4.9,0));
+    ramas_1.push(new three.Vector3(-1.4,4.7,0));
+    ramas_1.push(new three.Vector3(-1.6,4.5,0)); //Punto hacia la izquierda
+    ramas_1.push(new three.Vector3(-1.1,4,0));
+    ramas_1.push(new three.Vector3(-1,4.1,0));
+    ramas_1.push(new three.Vector3(-.6,4.1,0));
+    ramas_1.push(new three.Vector3(-.4,4.2,0));
+    ramas_1.push(new three.Vector3(-.3,4.4,0));
+    ramas_1.push(new three.Vector3(-.4,4.2,0));
+    ramas_1.push(new three.Vector3(-.6,4.1,0));
+    ramas_1.push(new three.Vector3(-1,4.1,0));
+    ramas_1.push(new three.Vector3(-1.1,4,0));
+    ramas_1.push(new three.Vector3(-1.1,3.4,0)); //Punto hacia la izquierda
+    ramas_1.push(new three.Vector3(-1,3.1,0)); //Punto hacia los lados
+    ramas_1.push(new three.Vector3(-1.2,3.4,0));
+    ramas_1.push(new three.Vector3(-1.6,3.8,0));
+    ramas_1.push(new three.Vector3(-1.8,3.8,0));
+    ramas_1.push(new three.Vector3(-2,3.7,0));
+    ramas_1.push(new three.Vector3(-2.2,3.8,0));
+    ramas_1.push(new three.Vector3(-2.4,3.84,0));
+    ramas_1.push(new three.Vector3(-2.6,3.6,0));
+    ramas_1.push(new three.Vector3(-3,3.4,0));
+    ramas_1.push(new three.Vector3(-2.6,3.6,0));
+    ramas_1.push(new three.Vector3(-2.4,3.84,0));
+    ramas_1.push(new three.Vector3(-2.2,3.8,0));
+    ramas_1.push(new three.Vector3(-2,3.7,0));
+    ramas_1.push(new three.Vector3(-1.8,3.8,0));
+    ramas_1.push(new three.Vector3(-1.6,3.8,0));
+    ramas_1.push(new three.Vector3(-1.2,3.4,0));
+    ramas_1.push(new three.Vector3(-1,3.1,0)); //Punto hacia los lados
+    ramas_1.push(new three.Vector3(-1.6,3.1,0));
+    ramas_1.push(new three.Vector3(-1.8,3.24,0));
+    ramas_1.push(new three.Vector3(-2,3.01,0));
+    ramas_1.push(new three.Vector3(-2.2,3.1,0));
+    ramas_1.push(new three.Vector3(-2,3.01,0));
+    ramas_1.push(new three.Vector3(-1.8,3.24,0));
+    ramas_1.push(new three.Vector3(-1.6,3.1,0));
+    ramas_1.push(new three.Vector3(-1,3.1,0)); //Punto hacia los lados
+    ramas_1.push(new three.Vector3(-.5,2.8,0)); //Punto hacia arriba
+    ramas_1.push(new three.Vector3(-.4,3,0));
+    ramas_1.push(new three.Vector3(0,3.2,0));
+    ramas_1.push(new three.Vector3(.1,3.4,0));
+    ramas_1.push(new three.Vector3(.3,3.3,0));
+    ramas_1.push(new three.Vector3(.3,3.1,0));
+    ramas_1.push(new three.Vector3(.3,3.3,0));
+    ramas_1.push(new three.Vector3(.1,3.4,0));
+    ramas_1.push(new three.Vector3(0,3.2,0));
+    ramas_1.push(new three.Vector3(-.4,3,0));
+    ramas_1.push(new three.Vector3(-.5,2.8,0)); //Punto hacia arriba
+    ramas_1.push(new three.Vector3(-.6,2.4,0));
+    ramas_1.push(new three.Vector3(-1,1.9,0));
+    ramas_1.push(new three.Vector3(-1,1.9,0));
+    ramas_1.push(new three.Vector3(-1.4,2,0));
+    ramas_1.push(new three.Vector3(-1.6,2.2,0));
+    ramas_1.push(new three.Vector3(-1.4,2,0));
+    ramas_1.push(new three.Vector3(-1,1.9,0));
+    ramas_1.push(new three.Vector3(-1,1.9,0));
+    ramas_1.push(new three.Vector3(-.6,2.01,0)); //Punto
+    ramas_1.push(new three.Vector3(-.6,2.01,0));
+    ramas_1.push(new three.Vector3(-.4,2,0));
+    ramas_1.push(new three.Vector3(.02,1.8,0));
+    ramas_1.push(new three.Vector3(.4,1.9,0));
+    ramas_1.push(new three.Vector3(.8,2.1,0));
+    ramas_1.push(new three.Vector3(1,2.6,0));
+    ramas_1.push(new three.Vector3(1.4,3.1,0)); // Punto
+    ramas_1.push(new three.Vector3(1.8,3.3,0)); 
+    ramas_1.push(new three.Vector3(2.2,3.2,0)); 
+    ramas_1.push(new three.Vector3(2.6,3.4,0)); 
+    ramas_1.push(new three.Vector3(2.7,3.8,0)); 
+    ramas_1.push(new three.Vector3(2.6,3.4,0)); 
+    ramas_1.push(new three.Vector3(2.2,3.2,0)); 
+    ramas_1.push(new three.Vector3(1.8,3.3,0)); 
+    ramas_1.push(new three.Vector3(1.4,3.1,0)); // Punto
+    ramas_1.push(new three.Vector3(1.4,3.6,0)); 
+    ramas_1.push(new three.Vector3(1.2,3.8,0)); 
+    ramas_1.push(new three.Vector3(1.3,4.4,0)); //Punto
+    ramas_1.push(new three.Vector3(1.6,4.5,0));
+    ramas_1.push(new three.Vector3(1.8,4.4,0));
+    ramas_1.push(new three.Vector3(2,4.6,0));
+    ramas_1.push(new three.Vector3(2.3,4.5,0));
+    ramas_1.push(new three.Vector3(2,4.6,0));
+    ramas_1.push(new three.Vector3(1.8,4.4,0));
+    ramas_1.push(new three.Vector3(1.6,4.5,0));
+    ramas_1.push(new three.Vector3(1.3,4.4,0)); //Punto
+    ramas_1.push(new three.Vector3(1.1,4.8,0)); 
+    ramas_1.push(new three.Vector3(1.4,5.2,0)); //Punto
+    ramas_1.push(new three.Vector3(1.8,5.4,0)); 
+    ramas_1.push(new three.Vector3(2.2,5.2,0)); 
+    ramas_1.push(new three.Vector3(2.2,5.0,0)); 
+    ramas_1.push(new three.Vector3(2.2,5.2,0)); 
+    ramas_1.push(new three.Vector3(1.8,5.4,0)); 
+    ramas_1.push(new three.Vector3(2.2,5.2,0)); 
+    ramas_1.push(new three.Vector3(2.2,5.0,0)); 
+    ramas_1.push(new three.Vector3(2.2,5.2,0)); 
+    ramas_1.push(new three.Vector3(1.8,5.4,0)); 
+    ramas_1.push(new three.Vector3(1.4,5.2,0)); //Punto
+    ramas_1.push(new three.Vector3(1.1,4.8,0)); 
+    ramas_1.push(new three.Vector3(.8,5.1,0)); 
+    ramas_1.push(new three.Vector3(.6,5.4,0)); 
+    ramas_1.push(new three.Vector3(.5,5.7,0)); 
+  
+
+
+
+    
+    
+
+    const ramas_1_geometria = new three.BufferGeometry().setFromPoints(ramas_1);
+    const ramas_lineas = new three.Line(ramas_1_geometria,rama_material);
+
+
+
+
+
+
+    scene.add(ramas_lineas);
+
+    return ramas_lineas;
+
+  }
+
 }
 
 
