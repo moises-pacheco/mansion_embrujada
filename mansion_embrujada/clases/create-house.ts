@@ -20,10 +20,12 @@ export class Mansion {
 
     const paredBrush = new Brush(
       new three.BoxGeometry(6, 5, 0.4),
-      new three.MeshMatcapMaterial({ color: "white" }),
+      new three.MeshStandardMaterial({ color: "#5A6366"}),
     );
+
     paredBrush.position.set(0, 0, 2.3);
     paredBrush.updateMatrixWorld();
+
 
     // Hueco ventana 1
     const huecoVentana1Brush = new Brush(
@@ -32,6 +34,7 @@ export class Mansion {
     huecoVentana1Brush.position.set(-1.96, 0.2, 2.3);
     huecoVentana1Brush.rotation.y = 0.78;
     huecoVentana1Brush.updateMatrixWorld();
+
 
     // Primera sustracción
     let paredConHueco = evaluator.evaluate(
@@ -44,6 +47,7 @@ export class Mansion {
     const huecoVentana2Brush = new Brush(
       new three.CylinderGeometry(0.6, 0.42, 1.4, 4),
     );
+
     huecoVentana2Brush.position.set(-0.76, 0.2, 2.3);
     huecoVentana2Brush.rotation.y = 0.78;
     huecoVentana2Brush.updateMatrixWorld();
@@ -51,8 +55,10 @@ export class Mansion {
     // Segunda sustracción
     const paredConHuecoBrush = new Brush(
       paredConHueco.geometry,
-      new three.MeshMatcapMaterial({ color: "white" }),
+      new three.MeshStandardMaterial({ color: "#5A6366" }),
     );
+
+    paredConHuecoBrush.castShadow = true;
     paredConHuecoBrush.position.set(0, 0, 2.3);
     paredConHuecoBrush.updateMatrixWorld();
 
@@ -61,20 +67,26 @@ export class Mansion {
       huecoVentana2Brush,
       SUBTRACTION,
     );
+
     scene.add(paredConHueco);
 
     const paredes_group = new three.Group();
 
     const pared_geometria = new three.BoxGeometry(6, 5, 0.4);
-    const pared_material = new three.MeshMatcapMaterial({
-      color: "white",
+    const pared_material = new three.MeshStandardMaterial({
+      color: "#5A6366",
       wireframe: false,
+      roughness: 0.9 
     });
     const pared_2 = new three.Mesh(pared_geometria, pared_material);
     const pared_3 = new three.Mesh(pared_geometria, pared_material);
     pared_3.geometry.dispose();
     pared_3.geometry = new three.BoxGeometry(4.4, 4, 0.4);
     const pared_4 = pared_3.clone();
+
+    pared_2.castShadow = true;
+    pared_3.castShadow = true;
+    pared_4.castShadow = true;
 
     pared_2.position.set(0, 0, -2.3);
     pared_3.rotation.set(0, 1.57, 0);
@@ -86,10 +98,12 @@ export class Mansion {
     scene.add(paredes_group);
 
     const tejado_group = new three.Group();
-
     const tejado_geometria = new three.CylinderGeometry(0.6, 5.4, 4, 4);
-    const tejado_material = new three.MeshMatcapMaterial({ color: "white" });
+    const tejado_material = new three.MeshStandardMaterial({ color: "#1A0F2B",roughness: 0.9 });
     const tejado = new three.Mesh(tejado_geometria, tejado_material);
+
+    tejado.castShadow = true;
+
 
     tejado.rotation.reorder("YXZ");
     tejado.position.y = 5;
@@ -111,8 +125,9 @@ export class Mansion {
     tejado_group.position.y = -0.6;
 
     const chimenea_geometria = new three.CylinderGeometry(0.6, 0.4, 3, 4);
-    const chimenea_material = new three.MeshMatcapMaterial({ color: "white" });
+    const chimenea_material = new three.MeshStandardMaterial({ color: "#3A3A3A",roughness: 0.9  });
     const chimenea = new three.Mesh(chimenea_geometria, chimenea_material);
+    chimenea.castShadow = true;
 
     chimenea.rotation.reorder("YXZ");
 
@@ -123,12 +138,18 @@ export class Mansion {
     scene.add(tejado_group);
 
     const pilares_geometria = new three.BoxGeometry(0.28, 4, 0.4);
-    const pilares_material = new three.MeshMatcapMaterial({ color: "white" });
+    const pilares_material = new three.MeshStandardMaterial({ color: "#4A4E4D",roughness: 0.9  });
     const pilar_1 = new three.Mesh(pilares_geometria, pilares_material);
     const pilar_2 = pilar_1.clone();
     const pilar_3 = pilar_1.clone();
     const pilar_4 = pilar_1.clone();
     const pilar_5 = pilar_1.clone();
+
+    pilar_1.castShadow = true;
+    pilar_2.castShadow = true;
+    pilar_3.castShadow = true;
+    pilar_4.castShadow = true;
+    pilar_5.castShadow = true;
 
     pilar_1.position.set(3.4, 0, 3);
     pilar_2.position.set(-3.4, 0, 3);
@@ -140,14 +161,16 @@ export class Mansion {
 
     //PUERTA
     const puerta_geometria = new three.BoxGeometry(1.2, 2, 0.4);
-    const puerta_material = new three.MeshMatcapMaterial({ color: "white" });
+    const puerta_material = new three.MeshStandardMaterial({ color: "#3A4032" });
     const puerta = new three.Mesh(puerta_geometria, puerta_material);
     puerta.position.set(1.6, -1, 2.6);
+    puerta.castShadow = true;
     scene.add(puerta);
 
     const suelo_geometria = new three.BoxGeometry(7.7, 7.7, 1);
-    const suelo_material = new three.MeshMatcapMaterial({ color: "white" });
+    const suelo_material = new three.MeshStandardMaterial({ color: "#5C5E61", roughness: 0.9 ,metalness: 0.1 });
     const suelo = new three.Mesh(suelo_geometria, suelo_material);
+    suelo.castShadow = true;
 
     suelo.position.y = -2.6;
     suelo.rotation.set(1.57, 0, 0);
@@ -155,8 +178,9 @@ export class Mansion {
     scene.add(suelo);
 
     const escaleras_geometria = new three.BoxGeometry(2, 0.6, 0.8);
-    const escaleras_material = new three.MeshMatcapMaterial({ color: "white" });
+    const escaleras_material = new three.MeshStandardMaterial({ color: "#3D423A" });
     const escalera_1 = new three.Mesh(escaleras_geometria, escaleras_material);
+    escalera_1.castShadow = true;
 
     escalera_1.position.set(1.58, -2.8, 4);
 
@@ -166,14 +190,19 @@ export class Mansion {
     const barandillas_group = new three.Group();
 
     const barandilla_geometria = new three.BoxGeometry(0.14, 1.1, 0.1);
-    const barandilla_material = new three.MeshMatcapMaterial({
-      color: "white",
+    const barandilla_material = new three.MeshStandardMaterial({
+      color: "#252525",
       wireframe: false,
+      roughness: 0.9 
     });
+    
     const barandilla_1 = new three.Mesh(
       barandilla_geometria,
       barandilla_material,
     );
+
+    barandilla_1.castShadow = true;
+
     barandilla_1.position.set(-2.8, -1.6, 3);
 
     const cantidad_barandillas = 9;
@@ -182,6 +211,7 @@ export class Mansion {
     for (let i = 0; i < cantidad_barandillas; i++) {
       let barandilla = barandilla_1.clone();
       barandillas.push(barandilla);
+      barandillas[i].castShadow = true;
       barandillas[i].position.x += posicion_x;
       posicion_x += 0.39;
       barandillas_group.add(barandillas[i]);
@@ -201,6 +231,7 @@ export class Mansion {
       let barandilla = barandilla_atras.clone();
       barandillas_atras.push(barandilla);
       barandillas_atras[i].position.x += posicion_x;
+      barandillas_atras[i].castShadow = true;
       posicion_x += 0.39;
       barandillas_atras_group.add(barandillas_atras[i]);
     }
@@ -214,14 +245,17 @@ export class Mansion {
       0.14,
       0.2,
     );
-    const parte_superior_barandilla_material = new three.MeshMatcapMaterial({
-      color: "white",
+    const parte_superior_barandilla_material = new three.MeshStandardMaterial({
+      color: "#3E2A1F",
       wireframe: false,
     });
+
     const parte_superior_barandilla = new three.Mesh(
       parte_superior_barandilla_geometria,
       parte_superior_barandilla_material,
     );
+
+    parte_superior_barandilla.castShadow = true;
     parte_superior_barandilla.position.set(-1.32, -1, 3);
 
     const parte_superior_barandilla_2 = parte_superior_barandilla.clone();
@@ -231,6 +265,8 @@ export class Mansion {
       0.14,
       0.2,
     );
+
+    parte_superior_barandilla_2.castShadow = true;
     parte_superior_barandilla_2.position.set(0, -1, -3);
     scene.add(parte_superior_barandilla_2);
 
@@ -241,6 +277,8 @@ export class Mansion {
       0.14,
       0.2,
     );
+
+    parte_superior_barandilla_3.castShadow = true;
     parte_superior_barandilla_3.rotation.y = 1.57;
     parte_superior_barandilla_3.position.set(-3.4, -1, 0);
     scene.add(parte_superior_barandilla_3);
@@ -266,7 +304,7 @@ export class Mansion {
     const ventanas_group = new three.Group();
     const ventanas_geometria = new three.CylinderGeometry(0.6, 0.42, 1.4, 4);
     const ventanas_material = new three.MeshStandardMaterial({
-      color: "red",
+      color: 0x39FF14,
       transparent: true,
       opacity: 0.4,
       depthWrite: false, // Evita que los oculte los objets que hay detrás
@@ -284,12 +322,15 @@ export class Mansion {
     scene.add(ventanas_group);
 
     const tierra_geometria = new three.BoxGeometry(20, 20, 1);
-    const tierra_material = new three.MeshMatcapMaterial({
-      color: 0x183815,
+    const tierra_material = new three.MeshStandardMaterial({
+      color: 'black',
       side: three.DoubleSide,
       wireframe: false,
+      roughness: 0.9,
     });
+
     const tierra = new three.Mesh(tierra_geometria, tierra_material);
+    tierra.receiveShadow = true;
 
     tierra.rotation.x = 1.57;
     tierra.position.y = -3.6;
@@ -300,12 +341,16 @@ export class Mansion {
     //Cruz
     const cruz_group = new three.Group();
     const cruz_geometria = new three.BoxGeometry(0.6, 3, 0.6);
-    const cruz_material = new three.MeshMatcapMaterial({
-      color: "white",
+    const cruz_material = new three.MeshStandardMaterial({
+      color: 0xB5B5B5,
       wireframe: false,
+      roughness: 0.9
     });
+
     const cruz_1 = new three.Mesh(cruz_geometria, cruz_material);
+    cruz_1.castShadow = true;
     const cruz_2 = cruz_1.clone();
+    cruz_2.castShadow = true;
 
     cruz_2.geometry = new three.BoxGeometry(0.6, 2, 0.6);
     cruz_1.position.set(0, -2, 8);
@@ -314,6 +359,7 @@ export class Mansion {
 
     const base_cruz_geometria = new three.BoxGeometry(1.8, 0.6, 1.2);
     const base_cruz = new three.Mesh(base_cruz_geometria, cruz_material);
+    base_cruz.castShadow = true;
     base_cruz.position.set(0, -3.4, 8);
 
     cruz_group.add(cruz_1, cruz_2, base_cruz);
@@ -326,7 +372,7 @@ export class Mansion {
     //Caminos
     const caminos_group = new three.Group();
     const caminos_geometria = new RoundedBoxGeometry(0.8, 0.2, 0.8, 4, 0.05);
-    const caminos_material = new three.MeshMatcapMaterial({ color: "white" });
+    const caminos_material = new three.MeshStandardMaterial({ color: 0xB5B5B5, roughness: 0.9 });
     const caminos_1 = new three.Mesh(caminos_geometria, caminos_material);
     caminos_1.position.set(1, -3.1, 5.3);
 
@@ -344,12 +390,14 @@ export class Mansion {
       segundo_camino.push(camino_2);
 
       if (primer_camino) {
+        primer_camino[i].castShadow = true;
         primer_camino[i].position.z += posicion_z;
         primer_camino[i].position.x += posicion_x_primer_camino;
         caminos_group.add(primer_camino[i]);
       }
 
       if (segundo_camino) {
+        segundo_camino[i].castShadow = true;
         segundo_camino[i].position.z += posicion_z;
         segundo_camino[i].position.x += posicion_x_segundo_camino;
         caminos_group.add(segundo_camino[i]);
@@ -410,10 +458,12 @@ export class Mansion {
 
     const rocas_group = new three.Group();
     const roca_geometria = new three.TetrahedronGeometry(0.4,2);
-    const roca_material = new three.MeshMatcapMaterial({color: 'white'});
+    const roca_material = new three.MeshStandardMaterial({color: 0xB5B5B5});
     const roca_1 = new three.Mesh(roca_geometria, roca_material);
+    roca_1.castShadow = true;
     roca_1.position.set(-8,-2.7,8)
     const roca_2 = roca_1.clone();
+    roca_2.castShadow = true;
     roca_1.scale.set(3,2,3);
 
     roca_2.position.x +=1;
@@ -421,6 +471,7 @@ export class Mansion {
     roca_2.scale.set(2,1,2);
 
     const roca_3 = roca_2.clone();
+    roca_3.castShadow = true;
     roca_3.position.z += 1;
     roca_3.position.x += .5;
     roca_3.position.y += -.3;
@@ -437,8 +488,9 @@ export class Mansion {
 
   crearRocasSueltas(scene: three.Scene){
     const roca_geometria = new three.TetrahedronGeometry(0.4,2);
-    const roca_material = new three.MeshMatcapMaterial({color: 'white'});
+    const roca_material = new three.MeshStandardMaterial({color: 0xB5B5B5});
     const roca = new three.Mesh(roca_geometria, roca_material);
+    roca.castShadow = true;
     roca.position.set(-8,-3,0);
     roca.scale.set(1.4,.4,1.4)
     scene.add(roca);
@@ -448,7 +500,7 @@ export class Mansion {
 
   crearArbol(scene: three.Scene){
 
-    const rama_material = new three.LineBasicMaterial({color:  'white' });
+    const rama_material = new three.LineBasicMaterial({color:  '#8ab164' });
     const ramas_1 = [];
 
     ramas_1.push(new three.Vector3(0,0,0));
