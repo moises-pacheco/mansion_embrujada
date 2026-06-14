@@ -49,15 +49,6 @@ export class Luz{
 
     }
 
-    
-    crearLuzLuciernagas(scene: three.Scene){
-        const luciernagas = new three.PointLight(0xCCFF00, 100);
-        luciernagas.position.set(-6.8,0,4);
-        const luciernagas_helper = new three.PointLightHelper(luciernagas, 1);
 
-        scene.add(luciernagas);
-        
-
-    }
 
 }

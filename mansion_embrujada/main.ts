@@ -3,15 +3,16 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Mansion } from './clases/create-house';
 import { Luz } from './clases/crear-luz';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js'
+import { Luciernagas } from './clases/crearLuciernagas';
 
 
 // Elementos esenciales para iniciar una escena.
 
 const scene = new three.Scene();
 scene.background = new three.Color(0x050505)
-// scene.fog = new three.FogExp2(0x081017, 0.04);
+scene.fog = new three.FogExp2(0x081017, 0.01);
 const camera = new three.PerspectiveCamera(70, window.innerWidth/ window.innerHeight, 0.1, 1000);
-camera.position.z = 40;
+camera.position.z = 30;
 
 
 camera.lookAt(0,0,0);
@@ -51,9 +52,9 @@ luz.crearLuces(scene);
 luz.crearPostesDeLuz(scene);
 
 //luciernagas
-luz.crearLuzLuciernagas(scene);
-
-
+const luciernagas = new Luciernagas(scene);
+luciernagas.particulas.position.set(-8.6,-1,2);
+luciernagas.crearLuzLuciernagas();
 
 
 
@@ -104,7 +105,7 @@ function animate(){
     // }
 
     controls.update();
-
+    luciernagas.crearLuciernagas();
     renderer.render(scene,camara_proyeccion);
 }
 
