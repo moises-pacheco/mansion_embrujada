@@ -434,23 +434,13 @@ export class Mansion {
     arbol.rotation.set(0,.8,0);
 
     //Prueba animación
-    const cubo_prueba = new three.BoxGeometry(0.4, 0.4, 0.4);
-    const cubo_material = new three.MeshMatcapMaterial({ color: "red" });
-    const cubo = new three.Mesh(cubo_prueba, cubo_material);
-    cubo.position.set(-2.2, 0, 0);
-    scene.add(cubo);
+    // const cubo_prueba = new three.BoxGeometry(0.4, 0.4, 0.4);
+    // const cubo_material = new three.MeshMatcapMaterial({ color: "red" });
+    // const cubo = new three.Mesh(cubo_prueba, cubo_material);
+    // cubo.position.set(-2.2, 0, 0);
+    // scene.add(cubo);
 
-    let angulo = 0;
-
-    function animate() {
-      requestAnimationFrame(animate);
-      // tejado_1.rotation.x += -0.01;
-      cubo.position.y = Math.sin(angulo);
-      cubo.rotation.x += 0.02;
-      angulo += 0.01;
-    }
-
-    animate();
+    // let angulo = 0;
   }
 
 

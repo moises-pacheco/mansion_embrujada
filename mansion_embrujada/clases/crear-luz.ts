@@ -9,7 +9,6 @@ export class Luz{
     crearLuces(scene: three.Scene){
 
         const ambient_ligh = new three.AmbientLight('#6A0DAD', 5);
-        ambient_ligh.castShadow = true;
 
 
         //Color morado

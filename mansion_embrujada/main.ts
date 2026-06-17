@@ -4,6 +4,7 @@ import { Mansion } from './clases/create-house';
 import { Luz } from './clases/crear-luz';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js'
 import { Luciernagas } from './clases/crearLuciernagas';
+import { Fantasma } from './clases/crearFantasma';
 
 
 // Elementos esenciales para iniciar una escena.
@@ -56,6 +57,11 @@ const luciernagas = new Luciernagas(scene);
 luciernagas.particulas.position.set(-8.6,-1,2);
 luciernagas.crearLuzLuciernagas();
 
+//Fantasma
+
+const fantasma = new Fantasma(scene);
+fantasma.crearFantasma();
+
 
 
 //Animaciones
@@ -105,6 +111,7 @@ function animate(){
     // }
 
     controls.update();
+    fantasma.crearMovimiento();
     luciernagas.crearLuciernagas();
     renderer.render(scene,camara_proyeccion);
 }
