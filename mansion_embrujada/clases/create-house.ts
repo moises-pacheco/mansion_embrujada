@@ -151,21 +151,34 @@ export class Mansion {
     pilar_4.castShadow = true;
     pilar_5.castShadow = true;
 
-    pilar_1.position.set(3.4, 0, 3);
-    pilar_2.position.set(-3.4, 0, 3);
-    pilar_3.position.set(-3.4, 0, -3);
-    pilar_4.position.set(3.4, 0, -3);
-    pilar_5.position.set(0.2, 0, 3);
+    pilar_1.position.set(3.4, -.1, 3);
+    pilar_2.position.set(-3.4, -.1, 3);
+    pilar_3.position.set(-3.4, -.1, -3);
+    pilar_4.position.set(3.4,-.1, -3);
+    pilar_5.position.set(0.2, -.1, 3);
 
     scene.add(pilar_1, pilar_2, pilar_3, pilar_4, pilar_5);
 
     //PUERTA
+
+    const puerta_group = new three.Group();
+
     const puerta_geometria = new three.BoxGeometry(1.2, 2, 0.4);
     const puerta_material = new three.MeshStandardMaterial({ color: "#3A4032" });
     const puerta = new three.Mesh(puerta_geometria, puerta_material);
     puerta.position.set(1.6, -1, 2.6);
     puerta.castShadow = true;
-    scene.add(puerta);
+
+    const manilla_puerta_geometria = new three.SphereGeometry(15, 32, 16 );
+    const manilla_puerta_material = new three.MeshMatcapMaterial({color: 'white'});
+    const manilla_puerta = new three.Mesh(manilla_puerta_geometria, manilla_puerta_material);
+    manilla_puerta.position.set(1.3,-1,2.84);
+    manilla_puerta.scale.set(.01,.01,.004);
+
+    //Puerta unión:
+    puerta_group.add(puerta,manilla_puerta);
+    scene.add(puerta_group);
+
 
     const suelo_geometria = new three.BoxGeometry(7.7, 7.7, 1);
     const suelo_material = new three.MeshStandardMaterial({ color: "#5C5E61", roughness: 0.9 ,metalness: 0.1 });
