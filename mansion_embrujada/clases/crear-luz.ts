@@ -40,10 +40,12 @@ export class Luz{
 
     crearPostesDeLuz(scene: three.Scene){
 
-        const poste_de_luz = new three.PointLight(0xCCFF00, 200);
+        const poste_de_luz = new three.PointLight(0xCCFF00, 150);
+        // const poste_de_luz_2 = new three.PointLight(0xCCFF00, 80);
         const poste_de_luz_helper = new three.PointLightHelper(poste_de_luz, 1);
 
-        poste_de_luz.position.set(8,1,10)
+        poste_de_luz.position.set(6,1,10)
+        // poste_de_luz_2.position.set(-6,1,10)
         scene.add(poste_de_luz);
 
     }

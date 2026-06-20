@@ -5,6 +5,7 @@ import { Luz } from './clases/crear-luz';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js'
 import { Luciernagas } from './clases/crearLuciernagas';
 import { Fantasma } from './clases/crearFantasma';
+import { Farola } from './clases/crear-farola';
 
 
 // Elementos esenciales para iniciar una escena.
@@ -13,7 +14,7 @@ const scene = new three.Scene();
 scene.background = new three.Color(0x050505)
 scene.fog = new three.FogExp2(0x081017, 0.01);
 const camera = new three.PerspectiveCamera(70, window.innerWidth/ window.innerHeight, 0.1, 1000);
-camera.position.z = 20;
+camera.position.z = 27;
 
 
 camera.lookAt(0,0,0);
@@ -62,6 +63,9 @@ luciernagas.crearLuzLuciernagas();
 const fantasma = new Fantasma(scene);
 fantasma.crearFantasma();
 
+//Farola
+const farola = new Farola(scene);
+const farola_bombillo_1 = farola.crearBombillo(new three.Vector3(8.2,0.5,11));
 
 
 //Animaciones
