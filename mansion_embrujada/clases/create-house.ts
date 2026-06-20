@@ -58,6 +58,7 @@ export class Mansion {
       new three.MeshStandardMaterial({ color: "#5A6366" }),
     );
 
+    
     paredConHuecoBrush.castShadow = true;
     paredConHuecoBrush.position.set(0, 0, 2.3);
     paredConHuecoBrush.updateMatrixWorld();
@@ -67,6 +68,13 @@ export class Mansion {
       huecoVentana2Brush,
       SUBTRACTION,
     );
+
+
+    const puertaBrush = new Brush(new three.BoxGeometry(1.2, 2, 0.4), new three.MeshStandardMaterial({color: "#3A4032" }));
+    puertaBrush.position.set(1.7, -1.1, 2.3);
+    puertaBrush.updateMatrixWorld();
+
+    paredConHueco = evaluator.evaluate(paredConHueco,puertaBrush, SUBTRACTION);
 
     scene.add(paredConHueco);
 

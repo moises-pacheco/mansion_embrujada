@@ -6,7 +6,6 @@ import { RGBELoader } from 'three/addons/loaders/RGBELoader.js'
 import { Luciernagas } from './clases/crearLuciernagas';
 import { Fantasma } from './clases/crearFantasma';
 import { Farola } from './clases/crear-farola';
-import { Raycaster } from './clases/raycaster';
 import { Puerta } from './clases/puerta';
 
 
