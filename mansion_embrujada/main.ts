@@ -69,7 +69,7 @@ const farola = new Farola(scene);
 const farola_bombillo_1 = farola.crearBombillo(new three.Vector3(8.2,0.5,11));
 
 //Puerta
-const puerta = new Puerta(scene,new three.Vector3(0, 0, -0.2), new three.Vector3(-0.3, 0, 0), camera);
+const puerta = new Puerta(scene,new three.Vector3(0, 0, -0.2), new three.Vector3(-0.3, 0, 0), camera, fantasma);
 
 //Raycaster
 // const raycaster = new Raycaster(scene, camera, puerta, document);
@@ -117,6 +117,21 @@ let camara_proyeccion = camera;
 // }
 
 
+
+function onResize() {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+
+  // 1. Actualiza el aspect ratio de la cámara
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix(); // obligatorio — sin esto Three.js ignora el cambio
+
+  // 2. Redimensiona el canvas
+  renderer.setSize(w, h);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+}
+
+window.addEventListener('resize', onResize);
 
 function animate(){
     requestAnimationFrame(animate);

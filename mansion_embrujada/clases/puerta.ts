@@ -1,4 +1,5 @@
 import * as three from "three";
+import { Fantasma } from "./crearFantasma";
 
 export class Puerta {
     private puerta_group: three.Group;
@@ -10,26 +11,31 @@ export class Puerta {
     private mouse: three.Vector2;
     private camera: three.Camera;
     private puerta: three.Group;
-    private document: Document;
+
+    private fantasma: Fantasma;
 
     constructor(
         scene: three.Scene,
         pos_puerta = new three.Vector3(0, 0, -0.2),
         pos_manilla = new three.Vector3(-0.3, 0, 0),
         camera: three.Camera,
+        fantasma: Fantasma
     ) {
         //Atributos para el evento
         this.raycaster = new three.Raycaster();
         this.mouse = new three.Vector2();
         this.camera = camera;
         this.scene = scene;
-        this.document = document;
         this.estaAbierta = false;
+        
 
         //Atributos para la puerta
         this.puerta_group = new three.Group();
         this.pivote_group = new three.Group();
         this.scene = scene;
+
+        //Fantasma
+        this.fantasma = fantasma;
 
         const puerta = new three.Mesh(
             new three.BoxGeometry(1.2, 2, 0.4),
@@ -48,18 +54,18 @@ export class Puerta {
         this.puerta_group.add(puerta, manilla_puerta);
         this.puerta_group.position.set(-0.6, 0, 0);
 
-        const pivote_helper = new three.AxesHelper(2);
+        // const pivote_helper = new three.AxesHelper(2);
         this.pivote_group.add(this.puerta_group);
         this.pivote_group.position.set(2.3, -1.1, 2.8);
         this.puerta = this.pivote_group;
         scene.add(this.pivote_group);
     }
 
+
     abrirPuerta() {
         this.estaAbierta = true;
         this.pivote_group.rotation.y = 1.57;
-
-        console.log(this.pivote_group.rotation.y);
+        this.fantasma.setFantasma(new three.Vector3(1.7,0,1));
     }
 
     cerrarPuerta() {
@@ -68,22 +74,22 @@ export class Puerta {
     }
 
     evento() {
-        this.document.addEventListener("pointerdown", (event) => {
+        document.addEventListener("pointerdown", (event) => {
             this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
             this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
             //Actualiza la cámara
+            this.camera.updateMatrixWorld();
             this.raycaster.setFromCamera(this.mouse, this.camera);
             //Encuentra el objeto
-            const objetoEncontrado = this.raycaster.intersectObject(this.puerta);
-            const grupoEncontrado = objetoEncontrado[0].object.parent;
-            if (objetoEncontrado.length > 0 && grupoEncontrado) {
+            const objetoEncontrado = this.raycaster.intersectObject(this.puerta, true);
+            if (objetoEncontrado.length > 0) {
                 if (this.estaAbierta == false) {
                     this.abrirPuerta();
                 } else if (this.estaAbierta == true) {
                     this.cerrarPuerta();
                 }
-            } 
+            }
         });
     }
 }
