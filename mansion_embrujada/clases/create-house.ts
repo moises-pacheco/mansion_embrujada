@@ -438,29 +438,7 @@ export class Mansion {
   }
 
 
-   crearPuerta(scene: three.Scene, pos = new three.Vector3(1.6,-1,2.6)) {
-    const puerta_group = new three.Group();
 
-    const puerta_geometria = new three.BoxGeometry(1.2, 2, 0.4);
-    const puerta_material = new three.MeshStandardMaterial({ color: "#3A4032" });
-    const puerta = new three.Mesh(puerta_geometria, puerta_material);
-    puerta.position.copy(pos);
-    puerta.castShadow = true;
-
-    //Pivote helper
-
-
-    const manilla_puerta_geometria = new three.SphereGeometry(15, 32, 16);
-    const manilla_puerta_material = new three.MeshMatcapMaterial({ color: 'white' });
-    const manilla_puerta = new three.Mesh(manilla_puerta_geometria, manilla_puerta_material);
-    manilla_puerta.position.set(1.3, -1, 2.84);
-    manilla_puerta.scale.set(.01, .01, .004);
-
-    //Puerta unión:
-    puerta_group.add(puerta, manilla_puerta);
-    scene.add(puerta_group);
-    return puerta_group;
-  }
 
   crearRocas(scene: three.Scene){
 

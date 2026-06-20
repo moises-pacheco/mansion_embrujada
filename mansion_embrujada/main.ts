@@ -7,6 +7,7 @@ import { Luciernagas } from './clases/crearLuciernagas';
 import { Fantasma } from './clases/crearFantasma';
 import { Farola } from './clases/crear-farola';
 import { Raycaster } from './clases/raycaster';
+import { Puerta } from './clases/puerta';
 
 
 // Elementos esenciales para iniciar una escena.
@@ -15,7 +16,7 @@ const scene = new three.Scene();
 scene.background = new three.Color(0x050505)
 scene.fog = new three.FogExp2(0x081017, 0.01);
 const camera = new three.PerspectiveCamera(70, window.innerWidth/ window.innerHeight, 0.1, 1000);
-camera.position.z = 27;
+camera.position.z = 2.4;
 
 
 camera.lookAt(0,0,0);
@@ -69,16 +70,11 @@ const farola = new Farola(scene);
 const farola_bombillo_1 = farola.crearBombillo(new three.Vector3(8.2,0.5,11));
 
 //Puerta
-const puerta = mansion.crearPuerta(scene);
-puerta.position.set(0,0,0);
-const puerta_pivote = new three.Group();
-const pivote_helper = new three.AxesHelper(1);
-puerta_pivote.add(pivote_helper);
-scene.add(puerta_pivote);
+const puerta = new Puerta(scene,new three.Vector3(0, 0, -0.2), new three.Vector3(-0.3, 0, 0), camera);
 
 //Raycaster
-const raycaster = new Raycaster(scene, camera, puerta, document);
-raycaster.abrirPuertaEvento();
+// const raycaster = new Raycaster(scene, camera, puerta, document);
+// raycaster.abrirPuertaEvento();
 
 
 
@@ -134,6 +130,7 @@ function animate(){
     controls.update();
     fantasma.crearMovimiento();
     luciernagas.crearLuciernagas();
+    puerta.evento();
     renderer.render(scene,camara_proyeccion);
 }
 
