@@ -6,6 +6,7 @@ import { RGBELoader } from 'three/addons/loaders/RGBELoader.js'
 import { Luciernagas } from './clases/crearLuciernagas';
 import { Fantasma } from './clases/crearFantasma';
 import { Farola } from './clases/crear-farola';
+import { Raycaster } from './clases/raycaster';
 
 
 // Elementos esenciales para iniciar una escena.
@@ -66,6 +67,22 @@ fantasma.crearFantasma();
 //Farola
 const farola = new Farola(scene);
 const farola_bombillo_1 = farola.crearBombillo(new three.Vector3(8.2,0.5,11));
+
+//Puerta
+const puerta = mansion.crearPuerta(scene);
+puerta.position.set(0,0,0);
+const puerta_pivote = new three.Group();
+const pivote_helper = new three.AxesHelper(1);
+puerta_pivote.add(pivote_helper);
+scene.add(puerta_pivote);
+
+//Raycaster
+const raycaster = new Raycaster(scene, camera, puerta, document);
+raycaster.abrirPuertaEvento();
+
+
+
+
 
 
 //Animaciones

@@ -161,25 +161,6 @@ export class Mansion {
 
     //PUERTA
 
-    const puerta_group = new three.Group();
-
-    const puerta_geometria = new three.BoxGeometry(1.2, 2, 0.4);
-    const puerta_material = new three.MeshStandardMaterial({ color: "#3A4032" });
-    const puerta = new three.Mesh(puerta_geometria, puerta_material);
-    puerta.position.set(1.6, -1, 2.6);
-    puerta.castShadow = true;
-
-    const manilla_puerta_geometria = new three.SphereGeometry(15, 32, 16 );
-    const manilla_puerta_material = new three.MeshMatcapMaterial({color: 'white'});
-    const manilla_puerta = new three.Mesh(manilla_puerta_geometria, manilla_puerta_material);
-    manilla_puerta.position.set(1.3,-1,2.84);
-    manilla_puerta.scale.set(.01,.01,.004);
-
-    //Puerta unión:
-    puerta_group.add(puerta,manilla_puerta);
-    scene.add(puerta_group);
-
-
     const suelo_geometria = new three.BoxGeometry(7.7, 7.7, 1);
     const suelo_material = new three.MeshStandardMaterial({ color: "#5C5E61", roughness: 0.9 ,metalness: 0.1 });
     const suelo = new three.Mesh(suelo_geometria, suelo_material);
@@ -456,6 +437,30 @@ export class Mansion {
     // let angulo = 0;
   }
 
+
+   crearPuerta(scene: three.Scene, pos = new three.Vector3(1.6,-1,2.6)) {
+    const puerta_group = new three.Group();
+
+    const puerta_geometria = new three.BoxGeometry(1.2, 2, 0.4);
+    const puerta_material = new three.MeshStandardMaterial({ color: "#3A4032" });
+    const puerta = new three.Mesh(puerta_geometria, puerta_material);
+    puerta.position.copy(pos);
+    puerta.castShadow = true;
+
+    //Pivote helper
+
+
+    const manilla_puerta_geometria = new three.SphereGeometry(15, 32, 16);
+    const manilla_puerta_material = new three.MeshMatcapMaterial({ color: 'white' });
+    const manilla_puerta = new three.Mesh(manilla_puerta_geometria, manilla_puerta_material);
+    manilla_puerta.position.set(1.3, -1, 2.84);
+    manilla_puerta.scale.set(.01, .01, .004);
+
+    //Puerta unión:
+    puerta_group.add(puerta, manilla_puerta);
+    scene.add(puerta_group);
+    return puerta_group;
+  }
 
   crearRocas(scene: three.Scene){
 
