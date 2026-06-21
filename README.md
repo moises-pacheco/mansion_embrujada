@@ -17,7 +17,7 @@ Para demostrar el dominio técnico y el control sobre la escena, **prácticament
   * El fantasma
   * La farola
  
---
+---
 
 ## Aprendizaje
 
