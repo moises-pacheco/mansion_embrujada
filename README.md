@@ -32,4 +32,6 @@ Este proyecto fue un verdadero reto para mi ya que fueron días con muchas compl
 --- 
 
 # Resultado 🏚️
+![img](https://github.com/moises-pacheco/mansion_embrujada/blob/d3b85e32826c6804477f2401a6ddb70c59c0f090/mansion_embrujada/img-referencia/img-repositorio/cap3.png)
+![img](https://github.com/moises-pacheco/mansion_embrujada/blob/d3b85e32826c6804477f2401a6ddb70c59c0f090/mansion_embrujada/img-referencia/img-repositorio/cap1.png)
 ![img](https://github.com/moises-pacheco/mansion_embrujada/blob/9ebab2c91342b1e50c89142265d62a07098591c7/mansion_embrujada/img-referencia/img-repositorio/img-repositorio.png)
