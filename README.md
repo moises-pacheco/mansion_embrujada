@@ -1,12 +1,12 @@
 # 👻 Mansión embrujada
 
-Ha sido un desafío enorme, desarrollado con mucha dedicación, pero el proceso ha sido muy satisfactorio. Este repositorio es un reflejo de mi evolución y el punto de partida para futuros proyectos.
+Ha sido un desafío pero el proceso ha sido muy satisfactorio. =)
 
 --- 
 
 ## Tecnologías
 
-Para demostrar el dominio técnico y el control sobre la escena, **prácticamente todo el entorno fue desarrollado desde cero**:
+**prácticamente todo el entorno fue desarrollado desde cero**:
 
 * **Three.js:**
   * La estructura de la mansión.
@@ -22,12 +22,12 @@ Para demostrar el dominio técnico y el control sobre la escena, **prácticament
 ## Aprendizaje
 
 Este proyecto fue un verdadero reto para mi ya que fueron días con muchas complicaciones pero con la satisfacción de que logré aprender: 
-1. Manipulación y creación de geometrías.
-2. Manipulación y creación de iluminación.
-3. Implementación de modelos 3D.
-4. Simulación de particulas.
-5. Interacción con objetos 3D.
-6. Implementación de HDR al entorno 3D.
+1. **Manipulación y creación de geometrías.**
+2. **Manipulación y creación de iluminación.**
+3. **Implementación de modelos 3D.**
+4. **Simulación de particulas.**
+5. **Interacción con objetos 3D.**
+6. **Implementación de HDR al entorno 3D.**
 
 --- 
 
