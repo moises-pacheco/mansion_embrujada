@@ -29,4 +29,7 @@ Este proyecto fue un verdadero reto para mi ya que fueron días con muchas compl
 5. Interacción con objetos 3D.
 6. Implementación de HDR al entorno 3D.
 
+--- 
+
+# Resultado 🏚️
 ![img](https://github.com/moises-pacheco/mansion_embrujada/blob/9ebab2c91342b1e50c89142265d62a07098591c7/mansion_embrujada/img-referencia/img-repositorio/img-repositorio.png)
