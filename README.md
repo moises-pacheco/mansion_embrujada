@@ -1,6 +1,6 @@
 # 👻 Mansión embrujada
 
-Ha sido un desafío técnico enorme, desarrollado con mucha dedicación, pero el proceso ha sido increíblemente enriquecedor. Este repositorio es un reflejo de mi evolución técnica y el punto de partida para futuras mejoras.
+Ha sido un desafío enorme, desarrollado con mucha dedicación, pero el proceso ha sido muy satisfactorio. Este repositorio es un reflejo de mi evolución y el punto de partida para futuros proyectos.
 
 --- 
 
