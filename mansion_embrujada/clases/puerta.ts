@@ -19,7 +19,7 @@ export class Puerta {
         pos_puerta = new three.Vector3(0, 0, -0.2),
         pos_manilla = new three.Vector3(-0.3, 0, 0),
         camera: three.Camera,
-        fantasma: Fantasma
+        fantasma: Fantasma,
     ) {
         //Atributos para el evento
         this.raycaster = new three.Raycaster();
@@ -27,7 +27,6 @@ export class Puerta {
         this.camera = camera;
         this.scene = scene;
         this.estaAbierta = false;
-        
 
         //Atributos para la puerta
         this.puerta_group = new three.Group();
@@ -61,16 +60,17 @@ export class Puerta {
         scene.add(this.pivote_group);
     }
 
-
     abrirPuerta() {
         this.estaAbierta = true;
         this.pivote_group.rotation.y = 1.57;
-        this.fantasma.setFantasma(new three.Vector3(1.7,0,1));
+        this.fantasma.setFantasma(new three.Vector3(-2,0,8), -2);
+        console.log(this.estaAbierta);
     }
 
     cerrarPuerta() {
         this.estaAbierta = false;
         this.pivote_group.rotation.y = 0;
+        console.log(this.estaAbierta);
     }
 
     evento() {
@@ -82,14 +82,16 @@ export class Puerta {
             this.camera.updateMatrixWorld();
             this.raycaster.setFromCamera(this.mouse, this.camera);
             //Encuentra el objeto
-            const objetoEncontrado = this.raycaster.intersectObject(this.puerta, true);
+            const objetoEncontrado = this.raycaster.intersectObject(
+                this.puerta,
+                true,
+            );
             if (objetoEncontrado.length > 0) {
-                if (this.estaAbierta == false) {
+                if (!this.estaAbierta) {
                     this.abrirPuerta();
-                } else if (this.estaAbierta == true) {
-                    this.cerrarPuerta();
                 }
             }
+
         });
     }
 }

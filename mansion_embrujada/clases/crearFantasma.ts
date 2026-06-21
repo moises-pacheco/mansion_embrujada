@@ -5,22 +5,39 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 export class Fantasma{
     private loader: GLTFLoader;
     private scene: three.Scene;
-    private ghost: three.Group | null = null;
+    private ghost: three.Group;
     private angulo: number;
 
     private pos: three.Vector3;
+    private alturaBase: number;
 
 
     constructor(scene: three.Scene){
+        this.ghost = new three.Group();
         this.loader = new GLTFLoader();
         this.scene = scene;
         this.angulo = 0;
         this.pos = new three.Vector3(-0.8,-.4,1.3);
+        this.alturaBase = -0.6;
     }
 
-    setFantasma(vector: three.Vector3){
+    setFantasma(vector: three.Vector3, alturaBase: number){
         this.pos = vector;
+        this.alturaBase = alturaBase;
+        this.actualizarFantasma();
+        setTimeout(() =>{
+            this.crearFantasma();
+        }, 1000)
     }
+
+    getFantasma(){
+        return this.ghost;
+    }
+
+    actualizarFantasma(){
+        this.getFantasma().clear();
+    }
+
 
     crearFantasma(){
         this.loader.load('./modelos/ghost.glb', (gltf) => {
@@ -36,10 +53,9 @@ export class Fantasma{
 
     crearMovimiento(){
         if(this.ghost){
-            const alturaBase = -0.6;
             const subida = 0.2;
 
-            this.ghost.position.y = alturaBase + (Math.sin(this.angulo) * subida);
+            this.ghost.position.y = this.alturaBase + (Math.sin(this.angulo) * subida);
             this.angulo += 0.02;
         }
     }
